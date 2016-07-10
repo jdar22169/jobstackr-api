@@ -10,7 +10,8 @@ const Job = new mongoose.Schema({
   isClosed: 'string',
   isToday: 'string',
   status: 'string',
-  description: 'string'
+  description: 'string',
+  statusValue: 'number'
 });
 
 module.exports = mongoose.model('job', Job);
