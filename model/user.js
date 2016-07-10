@@ -5,18 +5,10 @@ const bcrypt = require('bcrypt');
 const secret = process.env.SECRET || 'changeme';
 const jwt = require('jsonwebtoken');
 
-const Route = new mongoose.Schema({
-  nickname: {type: String, required: true},
-  route_id: {type: String, required: true},
-  stop_id: {type: String, required: true}
-});
-
 const User = new mongoose.Schema({
   email: {type: String, required: true},
   username: {type: String, required: true},
-  password: {type: String, required: true},
-  phoneNumber: {type: String, required: true},
-  routes: {type: [Route], required: false}
+  password: {type: String, required: true}
 });
 
 
