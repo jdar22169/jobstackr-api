@@ -2,7 +2,6 @@
 
 const Job = require('../model/job');
 const EventType = require('../model/eventtype');
-
 const Event = require('../model/event');
 const mongoose = require('mongoose');
 process.env.MONGODB_URI = 'mongodb://localhost/test_db';
