@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+- '4'
+services:
+- mongodb
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+env:
+- CXX=g++-4.8
+sudo: required
+before_script: npm install
+script:
+- npm run test
+- npm run lint
+cache:
+  directories:
+  - node_modules
+notifications:
+  slack:
+    secure: ySrUXL8DVlYBKpYSukzAIlzu64xChEda59o6sr1xlZev/e0/XcH7bd2p/91BALnpzwcC3WwQuxt/rWGVxGNoNV+P7k1NB4oAfhKnJ72i2ytFqBpCuR0SqAqS+7O+ZAews1gOVrlIFxtYWGKRp31LfD6ISZHZ463gEa13O1nbYd1cVfYGr855GCiK27KIquxD2IprAZBOYw0N7XtDIVFrAWmI7xSvjCaOhJAXcbkBnkwvTkq2DVVWqViuqZ+blRwe7XDmUgCNVX5W09PH6osotst2z0y4dBDp8VpLKff9H93GF1qkpL0hseZlTwlujVgAIw582vykgmIeKbvwWV3SOaJKGM50GD1yZFf5R0YVpQLzabtOsafBXXThos692gvYaO3fwMNNj4UhAUW7lj2+r3OSvrLVY3/O53s65SmTzLrqxTTn0bQ0zVt9u1H6zY/obhtZm1Z58rscP4DUUysijSR3umQmGI7Q9zb8lkeVJQS40kuF4O1fOPGXTqmwXxYKQaLNMeEDmCEoADM5jv2sgyRMDvhaOvyp1yVM+KZ05qjzcp3wsokC+PaWCZuINrp5WUkgVjIlI2SBYYkX2YnpSz79dcqXankb7WUe/CQKr5SbtQO/0eTca4fd5cOtCg0aoVm5w7Lz+4KjaK+i/ml7IQkLmUXKrdRFEnpXG6Igtmg=
