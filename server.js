@@ -13,11 +13,11 @@ mongoose.connect(dbUrl);
 
 
 const authRoutes = require('./route/auth_routes');
-
+const jobsRoutes = require('./route/jobs_routes');
 
 
 //app.use(morgan('dev'));
-app.use('/', authRoutes);
+app.use('/', authRoutes, jobsRoutes);
 
 app.use(errorHandler);
 
