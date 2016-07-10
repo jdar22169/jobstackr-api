@@ -3,8 +3,8 @@
 const mongoose = require('mongoose');
 
 const Event = new mongoose.Schema({
-  jobId: 'integer',
-  typeId: 'integer',
+  jobId: 'number',
+  typeId: 'number',
   note: 'string'
 });
 
