@@ -62,7 +62,7 @@ describe('Job Status Value unit', () => {
     });
   });
 
-  it('should set status value 1 for job with only apply ', (done) => {
+  it('should set status value 3 for job with two events ', (done) => {
     let req = {};
     var eventone = new Event({
       jobId: newjob._id,
