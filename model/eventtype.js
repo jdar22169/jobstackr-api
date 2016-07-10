@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const EventType = new mongoose.Schema({
-  value: 'integer',
+  value: 'number',
   name: 'string',
   description: 'string'
 });

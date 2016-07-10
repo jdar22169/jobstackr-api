@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const Job = new mongoose.Schema({
-  typeId: 'integer',
+  typeId: 'number',
   title: 'string',
   company: 'string',
   url: 'string',
