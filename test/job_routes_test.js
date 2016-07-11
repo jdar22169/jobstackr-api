@@ -42,20 +42,17 @@ describe('Job routes', () => {
       name: 'Job2',
       isArchived: true,
       userId: newUser._id
-    }, () => {
-    });
+    }, () => {});
     Job.create({
       name: 'Job3',
       isArchived: false,
       userId: newUser._id
-    }, () => {
-    });
+    }, () => {});
     Job.create({
       name: 'Job4',
       isArchived: false,
       userId: newUser._id
-    }, () => {
-    });
+    }, () => {});
     Job.create({
       name: 'Job6',
       isArchived: true
@@ -102,7 +99,6 @@ describe('Job routes', () => {
       });
   });
 
-
   it('should create a job entry with a POST request', (done) => {
     request('localhost:3000')
       .post('/jobs')
@@ -119,7 +115,6 @@ describe('Job routes', () => {
         done();
       });
   });
-
 
   it('shoud be able to update a job', (done) => {
     request('localhost:3000')
@@ -164,13 +159,13 @@ describe('Job routes', () => {
       });
   });
 
-it('should NOT be able to delete a job that does not belong to you', (done) => {
-  request('localhost:3000')
-    .delete('/jobs/' + job6)
-    .set('token', token)
-    .end((err, res) => {
-      expect(res).to.have.status(500);
-      done();
-    });
-});
+  it('should NOT be able to delete a job that does not belong to you', (done) => {
+    request('localhost:3000')
+      .delete('/jobs/' + job6)
+      .set('token', token)
+      .end((err, res) => {
+        expect(res).to.have.status(500);
+        done();
+      });
+  });
 });
