@@ -104,20 +104,20 @@ describe('Event Route Tests', () => {
       });
   });
 
-if (process.env.TRAVIS != 1) {
-  it('should update an event', (done) => {
-    testEvent.note = 'testnote';
-    request('localhost:3000')
-      .put('/events')
-      .send(testEvent)
-      .set('token', token)
-      .end((err, res) => {
-        expect(err).to.eql(null);
-        expect(res.body.message).to.eql('You have successfully updated event');
-        done();
-      });
-  });
-}
+  if (process.env.TRAVIS != 1) {
+    it('should update an event', (done) => {
+      testEvent.note = 'testnote';
+      request('localhost:3000')
+        .put('/events')
+        .send(testEvent)
+        .set('token', token)
+        .end((err, res) => {
+          expect(err).to.eql(null);
+          expect(res.body.message).to.eql('You have successfully updated event');
+          done();
+        });
+    });
+  }
 
   //TODO write route and activate test
   it('should get events with archived parent jobs', (done) => {
