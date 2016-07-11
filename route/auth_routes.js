@@ -25,11 +25,7 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
 });
 
 authRouter.post('/signin', basicHTTP, (req, res, next) => {
-  console.log('hit signin route');
   User.findOne({username: req.auth.username}, (err, user) => {
-    console.log('findOne err',err);
-    console.log('findOne user', user);
-
     if (err || !user) return next(new Error('user not found or error'
     ));
     if (!user.comparePassword(req.auth.password)) return next(new Error('Could not sign in'));

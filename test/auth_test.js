@@ -38,7 +38,7 @@ describe('User authorization should', () => {
   it('allow a known user to login and send a correct token', (done) => {
 
     request('localhost:3000')
-      .get('/signin')
+      .post('/signin')
       .auth('testuser', 'testuser')
       .end((err, res) => {
         expect(err).to.eql(null);
