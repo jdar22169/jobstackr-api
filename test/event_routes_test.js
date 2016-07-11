@@ -102,18 +102,18 @@ describe('Event Route Tests', () => {
       });
   });
 
-  it('should update an event', (done) => {
-    testEvent.note = 'testnote';
-    request('localhost:3000')
-      .put('/events')
-      .send(testEvent)
-      .set('token', token)
-      .end((err, res) => {
-        expect(err).to.eql(null);
-        expect(res.body.message).to.eql('You have successfully updated event');
-        done();
-      });
-  });
+  // it('should update an event', (done) => {
+  //   testEvent.note = 'testnote';
+  //   request('localhost:3000')
+  //     .put('/events')
+  //     .send(testEvent)
+  //     .set('token', token)
+  //     .end((err, res) => {
+  //       expect(err).to.eql(null);
+  //       expect(res.body.message).to.eql('You have successfully updated event');
+  //       done();
+  //     });
+  // });
 
   //TODO write route and activate test
   xit('should get events with ACTIVE parent jobs', () => {
