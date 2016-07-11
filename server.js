@@ -14,12 +14,13 @@ mongoose.connect(dbUrl);
 
 const authRoutes = require('./route/auth_routes');
 const jobsRoutes = require('./route/jobs_routes');
+const eventRoutes = require('./route/event_router.js');
 
 
 //app.use(morgan());
 app.use('/', authRoutes);
 app.use('/jobs', jobsRoutes);
-
+app.use('/events', eventRoutes);
 app.use(errorHandler);
 
 //TODO on / routes say res.json({message:'One Minute Away API V1'})
