@@ -125,7 +125,6 @@ describe('Event Route Tests', () => {
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body.length).to.eql(2);
-        console.log(res.body);
         done();
       });
   });
