@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-//const morgan = require('morgan');
+const cors = require('cors');
 const errorHandler = require('./lib/error_handler');
 
 
@@ -17,14 +17,14 @@ const jobsRoutes = require('./route/jobs_routes');
 const eventRoutes = require('./route/event_router.js');
 
 
-//app.use(morgan());
+app.use(cors());
 app.use('/', authRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/events', eventRoutes);
 
 app.use(errorHandler);
 
-//TODO on / routes say res.json({message:'One Minute Away API V1'})
+
 
 app.use((req, res) => {
   res.status(404).json({message: 'not found'});
