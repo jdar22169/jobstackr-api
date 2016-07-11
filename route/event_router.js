@@ -9,10 +9,9 @@ const jwtAuth = require(__dirname + '/../lib/jwt');
 
 const eventRouter = module.exports = express.Router();
 
-//TODO only return events that belong to user
-eventRouter.get('/active', (req,res, next) => {
+eventRouter.get('/active', jwtAuth, (req,res, next) => {
   let jobsArray = [];
-  Job.find({isArchived: false}, (err, jobs) => {
+  Job.find({isArchived: false, userId:req.user._id}, (err, jobs) => {
     if (err) return next(new Error(err));
     jobsArray = jobs.map(function(job){
       let results = [];
@@ -29,9 +28,22 @@ eventRouter.get('/active', (req,res, next) => {
 });
 
 
-//TODO Write GET route for /archived and returns only event that belong to jobs the user owns
-eventRouter.get('/archived', () => {
-
+eventRouter.get('/archived', jwtAuth,(req, res, next) => {
+  let jobsArray = [];
+  Job.find({isArchived: true, userId:req.user._id}, (err, jobs) => {
+    if (err) return next(new Error(err));
+    jobsArray = jobs.map(function(job){
+      let results = [];
+      results.push(job._id);
+      return results;
+    });
+    Event.find()
+    .where('jobId')
+    .in(jobsArray)
+    .exec(function(err,events){
+      res.json(events);
+    });
+  });
 });
 
 
