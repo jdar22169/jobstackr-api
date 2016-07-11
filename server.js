@@ -21,13 +21,14 @@ const eventRoutes = require('./route/event_router.js');
 app.use('/', authRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/events', eventRoutes);
-app.use(errorHandler);
 
 //TODO on / routes say res.json({message:'One Minute Away API V1'})
 
 app.use((req, res) => {
   res.status(404).json({message: 'not found'});
 });
+
+app.use(errorHandler);
 
 
 app.listen(process.env.PORT || 3000, () => {

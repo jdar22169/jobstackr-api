@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Job = new mongoose.Schema({
   typeId: 'string',
   title: 'string',
+  userId: 'string',
   company: 'string',
   url: 'string',
   isClosed: 'boolean',
