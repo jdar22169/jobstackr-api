@@ -16,6 +16,7 @@ require(__dirname + '/../server');
 
 describe('Job routes', () => {
   let job1_at;
+  let job6;
   let testUser;
   let token;
   beforeEach((done) => {
@@ -32,22 +33,37 @@ describe('Job routes', () => {
     });
     Job.create({
       name: 'Job1',
-      isArchived: true
+      isArchived: true,
+      userId: newUser._id
     }, (err, data) => {
       job1_at = data;
     });
     Job.create({
       name: 'Job2',
-      isArchived: true
+      isArchived: true,
+      userId: newUser._id
     }, () => {
     });
     Job.create({
       name: 'Job3',
-      isArchived: false
+      isArchived: false,
+      userId: newUser._id
     }, () => {
     });
     Job.create({
       name: 'Job4',
+      isArchived: false,
+      userId: newUser._id
+    }, () => {
+    });
+    Job.create({
+      name: 'Job6',
+      isArchived: true
+    }, (err, data) => {
+      job6 = data;
+    });
+    Job.create({
+      name: 'Job5',
       isArchived: false
     }, () => {
       done();
@@ -99,6 +115,7 @@ describe('Job routes', () => {
         expect(res).to.have.status(200);
         expect(res.body.title).to.eql('Web Dev');
         expect(res.body).to.have.property('_id');
+        expect(res.body.userId).to.eql(testUser._id.toString());
         done();
       });
   });
@@ -109,12 +126,28 @@ describe('Job routes', () => {
       .put('/jobs/' + job1_at._id)
       .set('token', token)
       .send({
-        name: 'new-test-beforeEach'
+        name: 'new-test-beforeEach',
+        userId: testUser._id
       })
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body.msg).to.eql('success');
+        done();
+      });
+  });
+
+  it('shoud NOT be able to update a job you don\'t own', (done) => {
+    request('localhost:3000')
+      .put('/jobs/' + job1_at._id)
+      .set('token', token)
+      .send({
+        name: 'new-test-beforeEach',
+        userId: '32432422ff'
+      })
+      .end((err, res) => {
+        //expect(err).to.eql(true);
+        expect(res).to.have.status(500);
         done();
       });
   });
@@ -130,4 +163,14 @@ describe('Job routes', () => {
         done();
       });
   });
+
+it('should NOT be able to delete a job that does not belong to you', (done) => {
+  request('localhost:3000')
+    .delete('/jobs/' + job6)
+    .set('token', token)
+    .end((err, res) => {
+      expect(res).to.have.status(500);
+      done();
+    });
+});
 });
