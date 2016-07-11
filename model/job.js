@@ -3,14 +3,15 @@
 const mongoose = require('mongoose');
 
 const Job = new mongoose.Schema({
-  typeId: 'number',
+  typeId: 'string',
   title: 'string',
   company: 'string',
   url: 'string',
-  isClosed: 'string',
-  isToday: 'string',
-  status: 'string',
-  description: 'string'
+  isClosed: 'boolean',
+  isToday: 'boolean',
+  description: 'string',
+  statusValue: 'number',
+  isArchived: 'boolean'
 });
 
 module.exports = mongoose.model('job', Job);

@@ -31,10 +31,10 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.6",
-    "body-parser": "1.15.1",
-    "express": "4.13.4",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
-    "mongoose": "4.4.19",
-    "morgan": "1.7.0"
+    "mongoose": "^4.4.19",
+    "morgan": "^1.7.0"
   }
 }

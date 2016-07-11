@@ -4,7 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const User = require('../model/user');
 const basicHTTP = require('../lib/basic_auth');
-
 const authRouter = module.exports = exports = express.Router();
 
 authRouter.post('/signup', bodyParser, (req, res, next) => {
