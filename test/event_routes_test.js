@@ -33,34 +33,36 @@ describe('Event Route Tests', () => {
       token = jwt.sign({
         _id: testUser._id
       }, secret);
-    });
-    Job.create({
-      name: 'Job1',
-      isArchived: true
-    }, (err, data) => {
-      job1 = data;
       Job.create({
-        name: 'Job2',
-        isArchived: false
+        name: 'Job1',
+        isArchived: true,
+        userId: testUser._id
       }, (err, data) => {
-        job2 = data;
-        Event.create({
-          jobId: job1._id
-        });
-        Event.create({
-          jobId: job1._id
-        });
-        Event.create({
-          jobId: job2._id
-        });
-        Event.create({
-          jobId: job2._id
-        });
-        Event.create({
-          jobId: job2._id
+        job1 = data;
+        Job.create({
+          name: 'Job2',
+          userId: testUser._id,
+          isArchived: false
         }, (err, data) => {
-          testEvent = data;
-          done();
+          job2 = data;
+          Event.create({
+            jobId: job1._id
+          });
+          Event.create({
+            jobId: job1._id
+          });
+          Event.create({
+            jobId: job2._id
+          });
+          Event.create({
+            jobId: job2._id
+          });
+          Event.create({
+            jobId: job2._id
+          }, (err, data) => {
+            testEvent = data;
+            done();
+          });
         });
       });
     });
@@ -102,29 +104,30 @@ describe('Event Route Tests', () => {
       });
   });
 
-  // it('should update an event', (done) => {
-  //   testEvent.note = 'testnote';
-  //   request('localhost:3000')
-  //     .put('/events')
-  //     .send(testEvent)
-  //     .set('token', token)
-  //     .end((err, res) => {
-  //       expect(err).to.eql(null);
-  //       expect(res.body.message).to.eql('You have successfully updated event');
-  //       done();
-  //     });
-  // });
+  it('should update an event', (done) => {
+    testEvent.note = 'testnote';
+    request('localhost:3000')
+      .put('/events')
+      .send(testEvent)
+      .set('token', token)
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res.body.message).to.eql('You have successfully updated event');
+        done();
+      });
+  });
 
   //TODO write route and activate test
-  xit('should get events with ACTIVE parent jobs', () => {
-    // request('localhost:3000')
-    //   .get('/events/active')
-    //   .set('token', token)
-    //   .end((err, res) => {
-        // expect(err).to.eql(null);
-        // expect(res.body.length).to.eql(2);
-        //done();
-      // });
+  it('should get events with archived parent jobs', (done) => {
+    request('localhost:3000')
+      .get('/events/archived')
+      .set('token', token)
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res.body.length).to.eql(2);
+        console.log(res.body);
+        done();
+      });
   });
 
   it('should get events with ACTIVE parent jobs', (done) => {
