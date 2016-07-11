@@ -8,21 +8,25 @@ const jwtAuth = require(__dirname + '/../lib/jwt');
 
 var jobRouter = module.exports = exports = express.Router();
 
-jobRouter.get('/jobs', (req, res) => {
-  Job.find({}, (err, data) => {
+
+//GET job/active Archive = f
+jobRouter.get('/active', jwtAuth, (req, res) => {
+  Job.find({isArchived:false}, (err, data) => {
     if (err) return errorHandle(err, res);
     res.status(200).json(data);
   });
 });
 
-jobRouter.get('/jobs', jwtAuth, (req, res) => {
-  Job.find({jobID: req.user._id}, (err, data) => {
+//GET job/active Archive = t
+jobRouter.get('/archived', jwtAuth, (req, res) => {
+  Job.find({isArchived:true}, (err, data) => {
     if (err) return errorHandle(err, res);
     res.status(200).json(data);
   });
 });
 
-jobRouter.post('/jobs', jsonParser, (req, res) => {
+
+jobRouter.post('/', jsonParser, jwtAuth, (req, res) => {
   var newJob = new Job(req.body);
   newJob.save((err, data) => {
     if (err) return errorHandle(err, res);
@@ -30,7 +34,8 @@ jobRouter.post('/jobs', jsonParser, (req, res) => {
   });
 });
 
-jobRouter.put('/jobs/:id', jsonParser, (req, res) => {
+
+jobRouter.put('/:id', jsonParser, jwtAuth, (req, res) => {
   var jobData = req.body;
   delete jobData._id;
   Job.update({ _id: req.params.id }, jobData, (err) => {
@@ -39,7 +44,7 @@ jobRouter.put('/jobs/:id', jsonParser, (req, res) => {
   });
 });
 
-jobRouter.delete('/jobs/:id', (req, res) => {
+jobRouter.delete('/:id', jwtAuth, (req, res) => {
   Job.remove({ _id: req.params.id }, (err) => {
     if (err) return errorHandle(err, res);
     res.status(200).json({ msg: 'success' });

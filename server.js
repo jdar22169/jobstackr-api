@@ -16,8 +16,9 @@ const authRoutes = require('./route/auth_routes');
 const jobsRoutes = require('./route/jobs_routes');
 
 
-//app.use(morgan('dev'));
-app.use('/', authRoutes, jobsRoutes);
+//app.use(morgan());
+app.use('/', authRoutes);
+app.use('/jobs', jobsRoutes);
 
 app.use(errorHandler);
 
