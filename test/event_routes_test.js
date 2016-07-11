@@ -103,11 +103,12 @@ describe('Event Route Tests', () => {
   });
 
   it('should update an event', (done) => {
+    //TODO add body and test if update really happens
     testEvent.note = 'testnote';
     request('localhost:3000')
       .put('/events/' + testEvent._id)
-      .set('token', token)
       .send(testEvent)
+      .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body.message).to.eql('You have successfully updated event');

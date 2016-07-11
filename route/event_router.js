@@ -47,10 +47,10 @@ eventRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
 
 //TODO check that a user is only modifying an event they that belongs to a job they own (middle ware???)
 //TODO implement jobstatusvalue middle ware
-eventRouter.put('/:id', bodyParser, jwtAuth, (req, res, next) => {
-  Event.findOneAndUpdate({_id:req.body._id}, req.body, (err) => {
+eventRouter.put('/', bodyParser, jwtAuth, (req, res, next) => {
+  Event.findOneAndUpdate({_id:req.body._id}, req.body, (err,event) => {
     if (err) return next(new Error(err));
-    res.json({message: 'You have successfully updated event}'});
+    res.json({message: 'You have successfully updated event', data:event});
   });
 });
 
