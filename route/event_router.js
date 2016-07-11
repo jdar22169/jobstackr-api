@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser').json();
+
 const Event = require('../model/event.js');
 const Job = require('../model/job.js');
 const jwtAuth = require(__dirname + '/../lib/jwt');
@@ -57,6 +58,7 @@ eventRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
   });
 });
 
+
 //TODO check that a user is only modifying an event they that belongs to a job they own (middle ware???)
 //TODO implement jobstatusvalue middle ware
 eventRouter.put('/', bodyParser, jwtAuth, (req, res, next) => {
@@ -72,5 +74,6 @@ eventRouter.delete('/:id', jwtAuth, (req, res, next) => {
   Event.findOneAndRemove({_id:req.params.id}, null, (err,events) => {
     if (err) return next(new Error(err));
     res.json({message: 'You have successfully deleted event', data:events});
+
   });
 });
