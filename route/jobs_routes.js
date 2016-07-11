@@ -34,7 +34,7 @@ jobRouter.post('/', jsonParser, jwtAuth, (req, res, next) => {
 
 jobRouter.put('/:id', jsonParser, jwtAuth, (req, res, next) => {
   var jobData = req.body;
-  if (req.user._id != req.body.userId) return next(new Error('not authorized'))
+  if (req.user._id != req.body.userId) return next(new Error('not authorized'));
   Job.update({ _id: req.params.id }, jobData, (err) => {
     if (err) return next(new Error(err));
     res.status(200).json({ msg: 'success' });
@@ -42,7 +42,7 @@ jobRouter.put('/:id', jsonParser, jwtAuth, (req, res, next) => {
 });
 
 jobRouter.delete('/:id', jwtAuth, (req, res, next) => {
-  Job.remove({ _id: req.params.id, userId: req.user._id }, (err,data) => {
+  Job.remove({ _id: req.params.id, userId: req.user._id }, (err) => {
     if (err) return next(new Error(err));
     res.status(200).json({ msg: 'success' });
   });
