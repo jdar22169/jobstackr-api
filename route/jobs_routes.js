@@ -25,7 +25,7 @@ jobRouter.get('/archived', jwtAuth, (req, res, next) => {
 //TODO check a user owns job be for modifying
 jobRouter.post('/', jsonParser, jwtAuth, (req, res, next) => {
   var newJob = new Job(req.body);
-  newJob.isArchived = false
+  newJob.isArchived = false;
   newJob.userId = req.user._id;
   newJob.save((err, data) => {
     if (err) return next(new Error(err));
