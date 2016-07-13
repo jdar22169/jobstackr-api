@@ -24,7 +24,7 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
   });
 });
 
-authRouter.get('/signin', basicHTTP, (req, res, next) => {
+authRouter.post('/signin', basicHTTP, (req, res, next) => {
   User.findOne({username: req.auth.username}, (err, user) => {
     if (err || !user) return next(new Error('user not found or error'
     ));
