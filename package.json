@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rebeccapeltz/node-project"
+    "url": "git+https://github.com/DashJob/dash-job-api"
   },
   "keywords": [],
-  "author": "",
+  "contributors": [
+    {"name":"Dustin"},
+    {"name":"Maddie"},
+    {"name":"Stephen"}
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rebeccapeltz/node-project/rest_api/issues"
-  },
-  "homepage": "https://github.com/rebeccapeltz/node-project/rest_api#readme",
   "devDependencies": {
     "chai": "3.5.0",
     "chai-http": "2.0.1",
