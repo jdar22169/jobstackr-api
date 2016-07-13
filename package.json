@@ -14,9 +14,15 @@
   },
   "keywords": [],
   "contributors": [
-    {"name":"Dustin"},
-    {"name":"Maddie"},
-    {"name":"Stephen"}
+    {
+      "name": "Dustin"
+    },
+    {
+      "name": "Maddie"
+    },
+    {
+      "name": "Stephen"
+    }
   ],
   "license": "MIT",
   "devDependencies": {
@@ -36,6 +42,7 @@
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
     "mongoose": "^4.4.19",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "scraperjs": "^1.2.0"
   }
 }
