@@ -52,9 +52,14 @@ eventRouter.get('/archived', jwtAuth,(req, res, next) => {
 //TODO check that a user is only modifying an event they that belongs to a job they own (middle ware???)
 //TODO implement jobstatusvalue middle ware
 eventRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
+  console.log("post");
   Job.find({_id:req.body.jobId}, (err,data) => {
     updateStatusValue(data, function(job){
-       console.log("job return",job);
+      console.log("updated",job[0]);
+       Job.findOneAndUpdate({_id:job[0]._id}, job[0], (err,data) =>{
+         console.log("saved",data);
+         console.log(err);
+       })
     });
   });
 
