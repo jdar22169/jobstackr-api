@@ -35,5 +35,5 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('up on 3000');
+  console.log('up on '+ (process.env.PORT || 3000));
 });
