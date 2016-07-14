@@ -81,7 +81,7 @@ describe('Event Route Tests', () => {
       .post('/events')
       .set('token', token)
       .send({
-        jobId: 1,
+        jobId: job1._id,
         typeId: 1,
         note: 'test'
       })
