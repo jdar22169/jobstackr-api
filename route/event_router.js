@@ -6,6 +6,7 @@ const bodyParser = require('body-parser').json();
 const Event = require('../model/event.js');
 const Job = require('../model/job.js');
 const jwtAuth = require(__dirname + '/../lib/jwt');
+const updateStatusValue = require('../lib/update_job_status_value')
 
 
 const eventRouter = module.exports = express.Router();
@@ -51,6 +52,12 @@ eventRouter.get('/archived', jwtAuth,(req, res, next) => {
 //TODO check that a user is only modifying an event they that belongs to a job they own (middle ware???)
 //TODO implement jobstatusvalue middle ware
 eventRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
+  Job.find({_id:req.body.jobId}, (err,data) => {
+    updateStatusValue(data, function(job){
+       console.log("job return",job);
+    });
+  });
+
   let newEvent = new Event(req.body);
   newEvent.save((err, events) => {
     if (err) return next(new Error(err));
