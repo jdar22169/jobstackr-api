@@ -1,7 +1,7 @@
 {
   "name": "JobDash-API",
   "version": "0.1.0",
-  "description": "Get time based alerts for your predefined bus routes",
+  "description": "Manage and organize your job search endeavors",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
@@ -16,7 +16,7 @@
   "contributors": [
     {
       "name": "Dustin McBride",
-      "email":"	dustinbm@gmail.com"
+      "email":"dustinbm@gmail.com"
     },
     {
       "name": "Maddie Mow",
