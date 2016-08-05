@@ -4,9 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const User = require('../model/user');
 const basicHTTP = require('../lib/basic_auth');
-
 const authRouter = module.exports = exports = express.Router();
-
 
 authRouter.post('/signup', bodyParser, (req, res, next) => {
   let newUser = new User(req.body);
@@ -26,7 +24,7 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
   });
 });
 
-authRouter.get('/signin', basicHTTP, (req, res, next) => {
+authRouter.post('/signin', basicHTTP, (req, res, next) => {
   User.findOne({username: req.auth.username}, (err, user) => {
     if (err || !user) return next(new Error('user not found or error'
     ));

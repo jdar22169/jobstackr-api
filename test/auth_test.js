@@ -21,9 +21,7 @@ describe('User authorization should', () => {
     let newUser = new User({
       username: 'testuser',
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
-      phoneNumber: '555555555',
-      email: 'test@test.com',
-      routes: []
+      email: 'test@test.com'
     });
     newUser.save((err, user) => {
       testUser = user;
@@ -40,7 +38,7 @@ describe('User authorization should', () => {
   it('allow a known user to login and send a correct token', (done) => {
 
     request('localhost:3000')
-      .get('/signin')
+      .post('/signin')
       .auth('testuser', 'testuser')
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -58,7 +56,6 @@ describe('User authorization should', () => {
       .send({
         username: 'user',
         password: 'password',
-        phoneNumber: '555555555',
         email: 'test@test.com'
       })
       .end((err, res) => {
