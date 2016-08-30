@@ -11,7 +11,7 @@ const Job = new mongoose.Schema({
   isClosed: 'boolean',
   isToday: 'boolean',
   description: 'string',
-  statusValue: 'number',
+  statusValue: { type: Number, default: 0 },
   isArchived: 'boolean'
 });
 

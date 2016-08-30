@@ -1,83 +1,72 @@
-'use strict';
-
-const Job = require('../model/job');
-const EventType = require('../model/eventtype');
-const Event = require('../model/event');
-const mongoose = require('mongoose');
-process.env.MONGODB_URI = 'mongodb://localhost/test_db';
-const chai = require('chai');
-const expect = chai.expect;
-const jobStatusValue = require('./../lib/job_status_value');
-
-mongoose.createConnection('mongodb://localhost/test_db');
-
-describe('Job Status Value unit', () => {
-  let newjob;
-  let etPhonescreen;
-  let etApplied;
-  beforeEach((done) => {
-    newjob = new Job({
-      title: 'Fullstack Javascript Developer',
-      status: 'unapplied'
-    });
-    newjob.save((err, job) => {
-      newjob = job;
-    });
-
-    etApplied = new EventType({
-      name: 'Applied',
-      value: 1
-    });
-    etApplied.save();
-
-    etPhonescreen = new EventType({
-      name: 'Phone Screen',
-      value: 2
-    });
-    etPhonescreen.save(() => {
-      done();
-    });
-
-  });
-
-  afterEach((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
-    });
-  });
-
-  it('should set status value 1 for job with only apply ', (done) => {
-    let req = {};
-    var event = new Event({
-      jobId: newjob._id,
-      typeId: etApplied._id
-    });
-    event.save(() => {
-      req.body = newjob;
-      jobStatusValue(req, null, ()=>{
-        expect(req.body.statusValue).to.eql(1);
-        done();
-      });
-    });
-  });
-
-  it('should set status value 3 for job with two events ', (done) => {
-    let req = {};
-    var eventone = new Event({
-      jobId: newjob._id,
-      typeId: etPhonescreen._id
-    });
-    eventone.save();
-    var eventtwo = new Event({
-      jobId: newjob._id,
-      typeId: etApplied._id
-    });
-    eventtwo.save(() => {
-      req.body = newjob;
-      jobStatusValue(req, null, ()=>{
-        expect(req.body.statusValue).to.eql(3);
-        done();
-      });
-    });
-  });
-});
+// 'use strict';
+// const mongoose = require('mongoose');
+// const Job = require('../model/job');
+// const Event = require('../model/event');
+// const getValue = require('../lib/update_job_status_value');
+//
+// const chai = require('chai');
+// const expect = chai.expect;
+//
+// mongoose.connect('mongodb://localhost/test_db');
+// let job1;
+// let job2;
+//
+// describe('unit test', () => {
+//
+//   beforeEach((done) => {
+//     new Job({
+//       title: 'Job 1'
+//     }).save((err, data) => {
+//       job1 = data;
+//       new Job({
+//         title: 'Job 2'
+//       }).save((err, data) => {
+//         if (err) console.log(err);
+//         job2 = data;
+//         new Event({
+//           jobId: job1._id,
+//           value: 1
+//         }).save(() => {
+//           new Event({
+//             jobId: job2._id,
+//             value: 1
+//           }).save(() => {
+//             new Event({
+//               jobId: job2._id,
+//               value: 2
+//             }).save(() => {
+//               new Event({
+//                 jobId: job2._id,
+//                 value: 3
+//               }).save(() => {
+//                 done();
+//               });
+//             });
+//           });
+//         });
+//       });
+//     });
+//   });
+//
+//   afterEach((done) => {
+//     Job.remove({}, function () {
+//       Event.remove({}, function () {
+//         done();
+//       });
+//     });
+//   });
+//
+//   it('it should return value of 1 for job 1', (done) => {
+//     getValue(job1, function (job) {
+//       expect(job.statusValue).to.eql(1);
+//       done();
+//     });
+//   });
+//
+//   it('it should return value of 6 for job 2', (done) => {
+//     getValue(job2, function (job) {
+//       expect(job.statusValue).to.eql(6);
+//       done();
+//     });
+//   });
+// });

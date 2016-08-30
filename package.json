@@ -1,7 +1,7 @@
 {
   "name": "JobDash-API",
   "version": "0.1.0",
-  "description": "Get time based alerts for your predefined bus routes",
+  "description": "Manage and organize your job search endeavors",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
@@ -10,15 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rebeccapeltz/node-project"
+    "url": "git+https://github.com/DashJob/dash-job-api"
   },
   "keywords": [],
-  "author": "",
+  "contributors": [
+    {
+      "name": "Dustin McBride",
+      "email":"dustinbm@gmail.com"
+    },
+    {
+      "name": "Maddie Mow",
+      "email":"mmow313@gmail.com"
+    },
+    {
+      "name": "Stephen Schroeder",
+      "email":"schrode50@gmail.com"
+    }
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rebeccapeltz/node-project/rest_api/issues"
-  },
-  "homepage": "https://github.com/rebeccapeltz/node-project/rest_api#readme",
   "devDependencies": {
     "chai": "3.5.0",
     "chai-http": "2.0.1",
@@ -36,6 +45,7 @@
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
     "mongoose": "^4.4.19",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "scraperjs": "^1.2.0"
   }
 }
