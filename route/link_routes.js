@@ -13,10 +13,27 @@ linkRouter.post('/', bodyParser, (req, res) => {
   //let url ='http://www.indeed.com/viewjob?jk=fda1d6a5d57ec412&tk=1angq6lsmb98tcg9&from=web'
   scraperjs.StaticScraper.create(url)
     .scrape(function ($) {
-      return {
-        company: $('div#job_header span.company').text(),
-        title: $('b.jobtitle font').text()
-      };
+      var obj = {}
+      obj.company = $("span.company").map(function () {
+        return $(this).text();
+      }).get()[0];
+
+       obj.title = $('#job-content font').text()
+
+       return obj
+      //return company
+      //http://www.indeed.com/cmp/iMatch-Technical-Services/jobs/Front-End-Engineer-510b14f714e64ba1?q=angular
+      // return {
+      //   title: $('#job-content font').text(),
+      //   company: $('#job-content > tbody > tr > td:nth-child(1) > div > span.company').text()
+      //   //#job-content > tbody > tr > td:nth-child(1) > div > span.company
+      //   //*[@id="job-content"]/tbody/tr/td[1]/div/span[1]
+      //   ////*[@id="job-content"]/tbody/tr/td[1]/div/span[1]
+      //   //company: $('span.company').text(),
+      //   //title: $('job-content > tbody > tr > td:nth-child(1) > div > b > font').text()
+      //   //#job-content > tbody > tr > td:nth-child(1) > div > b > font
+      //   //#job-content > tbody > tr > td:nth-child(1) > div > b
+      // };
     })
     .then(function (news) {
       console.log(news);
