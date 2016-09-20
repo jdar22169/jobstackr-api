@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const Event = new mongoose.Schema({
+  date: 'number',
   jobId: 'string',
   typeId: 'string',
   note: 'string',
