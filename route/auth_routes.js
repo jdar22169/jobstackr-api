@@ -26,9 +26,9 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
 
 authRouter.post('/signin', basicHTTP, (req, res, next) => {
   User.findOne({username: req.auth.username}, (err, user) => {
-    if (err || !user) return next(new Error('user not found or error'
+    if (err || !user) return next(new Error('Username and/or password does not match'
     ));
-    if (!user.comparePassword(req.auth.password)) return next(new Error('Could not sign in'));
+    if (!user.comparePassword(req.auth.password)) return next(new Error('Username and/or password does not match'));
     let obj = {};
     obj.token =  user.generateToken();
     obj.userId = user._id;

@@ -19,13 +19,14 @@ const jobsRoutes = require('./route/jobs_routes');
 const eventRoutes = require('./route/event_router.js');
 
 const linkRoutes = require('./route/link_routes.js');
-
+const statRoutes = require('./route/stat_routes.js');
 app.use(morgan('dev'));
 app.use(cors());
 app.use('/', authRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/events', eventRoutes);
 app.use('/link', linkRoutes);
+app.use('/stats', statRoutes);
 
 
 app.use((req, res) => {

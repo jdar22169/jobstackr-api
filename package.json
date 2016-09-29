@@ -16,15 +16,15 @@
   "contributors": [
     {
       "name": "Dustin McBride",
-      "email":"dustinbm@gmail.com"
+      "email": "dustinbm@gmail.com"
     },
     {
       "name": "Maddie Mow",
-      "email":"mmow313@gmail.com"
+      "email": "mmow313@gmail.com"
     },
     {
       "name": "Stephen Schroeder",
-      "email":"schrode50@gmail.com"
+      "email": "schrode50@gmail.com"
     }
   ],
   "license": "MIT",
@@ -44,6 +44,7 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
+    "moment": "^2.15.1",
     "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
     "scraperjs": "^1.2.0"
